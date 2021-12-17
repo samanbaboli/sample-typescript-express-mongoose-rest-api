@@ -1,5 +1,5 @@
 
-# A production ready of XCoin's REST-API 
+# A production ready of Xcoins™ REST-API 
 
 The new version of XCoin's test REST-API is based on Node.js and TypeScript.
 

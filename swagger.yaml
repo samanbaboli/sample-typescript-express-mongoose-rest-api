@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-   description: "A production ready of XCoin's REST-API"
+   description: "A production ready of Xcoins™ REST-API"
    version: "1.0.0"
    title: "The Xcoins REST-API"
    contact:

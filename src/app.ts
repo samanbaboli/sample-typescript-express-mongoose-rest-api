@@ -92,7 +92,7 @@ class App {
         info: {
           title: "Xcoin",
           version: "1.0.0",
-          description: "A production ready of XCoin's REST-API docs",
+          description: "A production ready of Xcoins™ REST-API docs",
         },
       },
       apis: ["swagger.yaml"],
