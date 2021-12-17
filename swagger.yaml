@@ -192,7 +192,7 @@ paths:
       post:
          tags:
             - "favorite"
-         summary: "Add a new favorite to the store"
+         summary: "Add a new favorite to the database"
          description: ""
          operationId: "addFavorite"
          consumes:
@@ -202,7 +202,7 @@ paths:
          parameters:
             - in: "body"
               name: "body"
-              description: "Favorite object that needs to be added to the DataBase"
+              description: "Favorite object that needs to be added to the database"
               required: true
               schema:
                  $ref: "#/definitions/Favorite"
@@ -226,7 +226,7 @@ paths:
          parameters:
             - in: "body"
               name: "body"
-              description: "Favorite object that needs to be added to the store"
+              description: "Favorite object that needs to be added to the database"
               required: true
               schema:
                  $ref: "#/definitions/Favorite"
@@ -262,7 +262,7 @@ paths:
                         items:
                            $ref: "#/components/schemas/Deployment"
 
-   /favorites/{favoriteId}:
+   /favorites/{:id}:
       get:
          tags:
             - "favorite"
@@ -272,7 +272,7 @@ paths:
          produces:
             - "application/json"
          parameters:
-            - name: "favoriteId"
+            - name: ":id"
               in: "path"
               description: "ID of favorite to return"
               required: true
@@ -299,7 +299,7 @@ paths:
          produces:
             - "application/json"
          parameters:
-            - name: "favoriteId"
+            - name: ":id"
               in: "path"
               description: "ID of favorite that needs to be updated"
               required: true
@@ -331,7 +331,7 @@ paths:
          produces:
             - "application/json"
          parameters:
-            - name: "favoriteId"
+            - name: ":id"
               in: "path"
               description: "Favorite id to delete"
               required: true
@@ -356,7 +356,7 @@ paths:
       post:
          tags:
             - "simulator"
-         summary: "Add a new simulator to the store"
+         summary: "Add a new simulator to the database"
          description: ""
          operationId: "addSimulator"
          consumes:
@@ -366,7 +366,7 @@ paths:
          parameters:
             - in: "body"
               name: "body"
-              description: "Simulator object that needs to be added to the DataBase"
+              description: "Simulator object that needs to be added to the database"
               required: true
               schema:
                  $ref: "#/definitions/Simulator"
@@ -390,7 +390,7 @@ paths:
          parameters:
             - in: "body"
               name: "body"
-              description: "Simulator object that needs to be added to the store"
+              description: "Simulator object that needs to be added to the database"
               required: true
               schema:
                  $ref: "#/definitions/Simulator"
