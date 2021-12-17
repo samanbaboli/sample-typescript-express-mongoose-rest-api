@@ -38,7 +38,9 @@ paths:
                  $ref: "#/definitions/Profile"
          responses:
             "201":
-               description: "Invalid input"
+               description: "Created Successfuly"
+            "400":
+               description: "Bad request"
          security:
             - profilestore_auth:
                  - "write:profiles"
@@ -118,8 +120,7 @@ paths:
                description: "Valditaion Error"
             "404":
                description: "Profile not found"
-         security:
-            - api_key: []
+       
       post:
          tags:
             - "profile"
@@ -165,10 +166,7 @@ paths:
             - "application/xml"
             - "application/json"
          parameters:
-            - name: "api_key"
-              in: "header"
-              required: false
-              type: "string"
+       
             - name: "profileId"
               in: "path"
               description: "Profile id to delete"
@@ -190,13 +188,13 @@ paths:
 
 
 
-   /favourite:
+   /favorites:
       post:
          tags:
-            - "favourite"
-         summary: "Add a new favourite to the store"
+            - "favorite"
+         summary: "Add a new favorite to the store"
          description: ""
-         operationId: "addFavourite"
+         operationId: "addFavorite"
          consumes:
             - "application/json"
          produces:
@@ -204,23 +202,23 @@ paths:
          parameters:
             - in: "body"
               name: "body"
-              description: "Favourite object that needs to be added to the DataBase"
+              description: "Favorite object that needs to be added to the DataBase"
               required: true
               schema:
-                 $ref: "#/definitions/Favourite"
+                 $ref: "#/definitions/Favorite"
          responses:
             "201":
                description: "Invalid input"
          security:
-            - favouritestore_auth:
-                 - "write:favourites"
-                 - "read:favourites"
+            - favoritestore_auth:
+                 - "write:favorites"
+                 - "read:favorites"
       put:
          tags:
-            - "favourite"
-         summary: "Update an existing favourite"
+            - "favorite"
+         summary: "Update an existing favorite"
          description: ""
-         operationId: "updateFavourite"
+         operationId: "updateFavorite"
          consumes:
             - "application/json"
          produces:
@@ -228,26 +226,26 @@ paths:
          parameters:
             - in: "body"
               name: "body"
-              description: "Favourite object that needs to be added to the store"
+              description: "Favorite object that needs to be added to the store"
               required: true
               schema:
-                 $ref: "#/definitions/Favourite"
+                 $ref: "#/definitions/Favorite"
          responses:
             "400":
                description: "Valditaion Error"
             "404":
-               description: "favourite not found"
+               description: "favorite not found"
          
          security:
-            - favouritestore_auth:
-                 - "write:favourites"
-                 - "read:favourites"
+            - favoritestore_auth:
+                 - "write:favorites"
+                 - "read:favorites"
       get:
          tags:
-            - "favourite"
-         summary: "Get All favourite"
+            - "favorite"
+         summary: "Get All favorite"
          description: ""
-         operationId: "getFavourite"
+         operationId: "getFavorite"
          consumes:
             - "application/json"
             - "application/xml"
@@ -264,20 +262,19 @@ paths:
                         items:
                            $ref: "#/components/schemas/Deployment"
 
-   /favourite/{favouriteId}:
+   /favorites/{favoriteId}:
       get:
          tags:
-            - "favourite"
-         summary: "Find favourite by ID"
-         description: "Returns a single favourite"
-         operationId: "getFavouriteById"
+            - "favorite"
+         summary: "Find favorite by ID"
+         description: "Returns a single favorite"
+         operationId: "getFavoriteById"
          produces:
-            - "application/xml"
             - "application/json"
          parameters:
-            - name: "favouriteId"
+            - name: "favoriteId"
               in: "path"
-              description: "ID of favourite to return"
+              description: "ID of favorite to return"
               required: true
               type: "number"
               format: "int64"
@@ -285,65 +282,58 @@ paths:
             "200":
                description: "successful operation"
                schema:
-                  $ref: "#/definitions/Favourite"
+                  $ref: "#/definitions/Favorite"
             "400":
                description: "Valditaion Error"
             "404":
-               description: "Favourite not found"
-         security:
-            - api_key: []
+               description: "Favorite not found"
+       
       post:
          tags:
-            - "favourite"
-         summary: "Updates a favourite in the database"
+            - "favorite"
+         summary: "Updates a favorite in the database"
          description: ""
-         operationId: "updateFavouriteWithForm"
+         operationId: "updateFavoriteWithForm"
          consumes:
             - "application/x-www-form-urlencoded"
          produces:
-            - "application/xml"
             - "application/json"
          parameters:
-            - name: "favouriteId"
+            - name: "favoriteId"
               in: "path"
-              description: "ID of favourite that needs to be updated"
+              description: "ID of favorite that needs to be updated"
               required: true
               type: "number"
               format: "int64"
             - name: "name"
               in: "formData"
-              description: "Updated name of the favourite"
+              description: "Updated name of the favorite"
               required: false
               type: "string"
             - name: "status"
               in: "formData"
-              description: "Updated status of the favourite"
+              description: "Updated status of the favorite"
               required: false
               type: "string"
          responses:
             "405":
                description: "Invalid input"
          security:
-            - favouritestore_auth:
-                 - "write:favourites"
-                 - "read:favourites"
+            - favoritestore_auth:
+                 - "write:favorites"
+                 - "read:favorites"
       delete:
          tags:
-            - "favourite"
-         summary: "Deletes a favourite"
+            - "favorite"
+         summary: "Deletes a favorite"
          description: ""
-         operationId: "deleteFavourite"
+         operationId: "deleteFavorite"
          produces:
-            - "application/xml"
             - "application/json"
          parameters:
-            - name: "api_key"
-              in: "header"
-              required: false
-              type: "string"
-            - name: "favouriteId"
+            - name: "favoriteId"
               in: "path"
-              description: "Favourite id to delete"
+              description: "Favorite id to delete"
               required: true
               type: "number"
               format: "int64"
@@ -351,11 +341,11 @@ paths:
             "400":
                description: "Valditaion Error"
             "404":
-               description: "favourite not found"
+               description: "favorite not found"
          security:
-            - favouritestore_auth:
-                 - "write:favourites"
-                 - "read:favourites"
+            - favoritestore_auth:
+                 - "write:favorites"
+                 - "read:favorites"
 
      
                  
@@ -422,9 +412,7 @@ paths:
          operationId: "getSimulator"
          consumes:
             - "application/json"
-            - "application/xml"
          produces:
-            - "application/xml"
             - "application/json"
          responses:
             "200":
@@ -444,7 +432,6 @@ paths:
          description: "Returns a single simulator"
          operationId: "getSimulatorById"
          produces:
-            - "application/xml"
             - "application/json"
          parameters:
             - name: "simulatorId"
@@ -462,8 +449,7 @@ paths:
                description: "Valditaion Error"
             "404":
                description: "Simulator not found"
-         security:
-            - api_key: []
+       
       post:
          tags:
             - "simulator"
@@ -473,7 +459,6 @@ paths:
          consumes:
             - "application/x-www-form-urlencoded"
          produces:
-            - "application/xml"
             - "application/json"
          parameters:
             - name: "simulatorId"
@@ -506,13 +491,10 @@ paths:
          description: ""
          operationId: "deleteSimulator"
          produces:
-            - "application/xml"
+
             - "application/json"
          parameters:
-            - name: "api_key"
-              in: "header"
-              required: false
-              type: "string"
+         
             - name: "simulatorId"
               in: "path"
               description: "Simulator id to delete"
@@ -555,19 +537,19 @@ definitions:
             example: "samanbaboli@gmail.com"
          divisa:
             type: "string"
-            example: "..."
+            example: "sdfr43fdf"
          preferedCryptoCurrency:
             type: "string"
             example: "ETH"
       xml:
          name: "Profile"
 
-   Favourite:
+   Favorite:
       type: "object"
       required:
          - "profileId"
          - "name"
-         - "favourites"
+         - "favorites"
       properties:
          capital:
             type: "string"
@@ -575,7 +557,7 @@ definitions:
          name:
             type: "string"
             example: "Saman"
-         favourites:
+         favorites:
             type: "array"
             example: ["ETH","ETH"]
       xml:

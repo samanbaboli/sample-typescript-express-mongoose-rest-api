@@ -90,9 +90,9 @@ class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: "REST API",
+          title: "Xcoin",
           version: "1.0.0",
-          description: "Example docs",
+          description: "A production ready of XCoin's REST-API docs",
         },
       },
       apis: ["swagger.yaml"],
