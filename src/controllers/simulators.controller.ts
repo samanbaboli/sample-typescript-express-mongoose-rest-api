@@ -14,7 +14,7 @@ class SimulatorController {
 
       res.set(
         "Location",
-        `${process.env.baseUrl} + /simulators/${createSimulator._id}`
+        `${process.env.BASE_URL} + /simulators/${createSimulator._id}`
       );
       res.status(201).json({
         data: createSimulator,
@@ -50,7 +50,7 @@ class SimulatorController {
       }
       res.status(200).json({
         data: simulator,
-        message: "Your simulator one has been retrieved successfully.",
+        message: "Your simulator has been retrieved successfully.",
       });
     } catch (error) {
       next(error);
@@ -70,7 +70,7 @@ class SimulatorController {
       }
       res.status(200).json({
         data: updatedSimulator,
-        message: "Your simulator one has been updated successfully.",
+        message: "Your simulator has been updated successfully.",
       });
     } catch (error) {
       next(error);
@@ -88,7 +88,7 @@ class SimulatorController {
       }
       res.status(204).json({
         data: {},
-        message: "Your simulator one has been deleted successfully.",
+        message: "Your simulator has been deleted successfully.",
       });
     } catch (error) {
       next(error);

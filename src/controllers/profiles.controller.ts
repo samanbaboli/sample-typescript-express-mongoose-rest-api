@@ -14,7 +14,7 @@ class ProfileController {
 
       res.set(
         "Location",
-        `${process.env.baseUrl} + /profiles/${createProfile._id}`
+        `${process.env.BASE_URL} + /profiles/${createProfile._id}`
       );
       res.status(201).json({
         data: createProfile,
@@ -50,7 +50,7 @@ class ProfileController {
       }
       res.status(200).json({
         data: profile,
-        message: "Your profile one has been retrieved successfully.",
+        message: "Your profile has been retrieved successfully.",
       });
     } catch (error) {
       next(error);
@@ -70,7 +70,7 @@ class ProfileController {
       }
       res.status(200).json({
         data: updatedProfile,
-        message: "Your profile one has been updated successfully.",
+        message: "Your profile has been updated successfully.",
       });
     } catch (error) {
       next(error);
@@ -88,7 +88,7 @@ class ProfileController {
       }
       res.status(204).json({
         data: {},
-        message: "Your profile one has been deleted successfully.",
+        message: "Your profile has been deleted successfully.",
       });
     } catch (error) {
       next(error);

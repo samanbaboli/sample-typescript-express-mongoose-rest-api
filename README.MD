@@ -38,6 +38,7 @@ The new version of XCoin's test REST-API is based on Node.js and TypeScript.
 To run this project, you will need to add the following environment variables to your .env file
 
 `PORT`
+`BASE_URL` 
 
 
 ## Run Locally

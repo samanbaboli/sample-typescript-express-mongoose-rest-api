@@ -14,7 +14,7 @@ class FavoriteController {
 
       res.set(
         "Location",
-        `${process.env.baseUrl} + /favorites/${createFavorite._id}`
+        `${process.env.BASE_URL} + /favorites/${createFavorite._id}`
       );
       res.status(201).json({
         data: createFavorite,
