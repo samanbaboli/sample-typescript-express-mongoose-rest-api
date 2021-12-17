@@ -1,0 +1,17 @@
+{
+    "env": "development",
+    "dbConfig": {
+        "host": "localhost",
+        "database": "xcoins",
+        "port": 27017
+    },
+    "secretKey": "RR^&T*()SPIODUhuakjd",
+    "log": {
+        "format": "dev",
+        "dir": "../logs"
+    },
+    "cors": {
+        "origin": true,
+        "credentials": true
+    }
+}

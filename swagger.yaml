@@ -1,0 +1,613 @@
+swagger: "2.0"
+info:
+   description: "A production ready of XCoin's REST-API"
+   version: "1.0.0"
+   title: "The Xcoins REST-API"
+   contact:
+      email: "samanbaboli@gmail.com"
+host: "127.0.0.1:3009"
+basePath: "/api"
+tags:
+   - name: "profile"
+     description: "Profiles and everything associated with them"
+   - name: "favorite"
+     description: "Favorites and everything associated with them"
+   - name: "simulator"
+     description: "Simulators and everything associated with them"
+
+schemes:
+   - "http"
+paths:
+   /profile:
+      post:
+         tags:
+            - "profile"
+         summary: "Add a new profile to the database"
+         description: ""
+         operationId: "newProfile"
+         consumes:
+            - "application/json"
+         produces:
+            - "application/json"
+         parameters:
+            - in: "body"
+              name: "body"
+              description: "Profile document"
+              required: true
+              schema:
+                 $ref: "#/definitions/Profile"
+         responses:
+            "201":
+               description: "Invalid input"
+         security:
+            - profilestore_auth:
+                 - "write:profiles"
+                 - "read:profiles"
+      put:
+         tags:
+            - "profile"
+         summary: "Update an existing profile"
+         description: ""
+         operationId: "updateProfile"
+         consumes:
+            - "application/json"
+         produces:
+            - "application/json"
+         parameters:
+            - in: "body"
+              name: "body"
+              description: "Profile document"
+              required: true
+              schema:
+                 $ref: "#/definitions/Profile"
+         responses:
+            "400":
+               description: "Validation error"
+            "404":
+               description: "Profile not found"
+         
+         security:
+            - profilestore_auth:
+                 - "write:profiles"
+                 - "read:profiles"
+      get:
+         tags:
+            - "profile"
+         summary: "Get list of Profiles"
+         description: ""
+         operationId: "findProfiles"
+         consumes:
+            - "application/json"
+            - "application/xml"
+         produces:
+            - "application/xml"
+            - "application/json"
+         responses:
+            "200":
+               description: "OK"
+               content:
+                  application/json:
+                     schema:
+                        type: array
+                        items:
+                           $ref: "#/components/schemas/Deployment"
+
+   /profile/{profileId}:
+      get:
+         tags:
+            - "profile"
+         summary: "Find a Profile by it's ID"
+         description: "Returns a single document that contains profile"
+         operationId: "findProfileById"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "profileId"
+              in: "path"
+              description: "ID of profile"
+              required: true
+              type: "objectId"
+              format: "int64"
+         responses:
+            "200":
+               description: "successful operation"
+               schema:
+                  $ref: "#/definitions/Profile"
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "Profile not found"
+         security:
+            - api_key: []
+      post:
+         tags:
+            - "profile"
+         summary: "Updates a profile in the database"
+         description: ""
+         operationId: "updateProfileWithForm"
+         consumes:
+            - "application/x-www-form-urlencoded"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "profileId"
+              in: "path"
+              description: "ID of profile that needs to be updated"
+              required: true
+              type: "number"
+              format: "int64"
+            - name: "name"
+              in: "formData"
+              description: "Updated name of the profile"
+              required: false
+              type: "string"
+            - name: "status"
+              in: "formData"
+              description: "Updated status of the profile"
+              required: false
+              type: "string"
+         responses:
+            "405":
+               description: "Invalid input"
+         security:
+            - profilestore_auth:
+                 - "write:profiles"
+                 - "read:profiles"
+      delete:
+         tags:
+            - "profile"
+         summary: "Deletes a profile"
+         description: ""
+         operationId: "deleteProfile"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "api_key"
+              in: "header"
+              required: false
+              type: "string"
+            - name: "profileId"
+              in: "path"
+              description: "Profile id to delete"
+              required: true
+              type: "number"
+              format: "int64"
+         responses:
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "Profile not found"
+         security:
+            - profilestore_auth:
+                 - "write:profiles"
+                 - "read:profiles"
+
+
+
+
+
+
+   /favourite:
+      post:
+         tags:
+            - "favourite"
+         summary: "Add a new favourite to the store"
+         description: ""
+         operationId: "addFavourite"
+         consumes:
+            - "application/json"
+         produces:
+            - "application/json"
+         parameters:
+            - in: "body"
+              name: "body"
+              description: "Favourite object that needs to be added to the DataBase"
+              required: true
+              schema:
+                 $ref: "#/definitions/Favourite"
+         responses:
+            "201":
+               description: "Invalid input"
+         security:
+            - favouritestore_auth:
+                 - "write:favourites"
+                 - "read:favourites"
+      put:
+         tags:
+            - "favourite"
+         summary: "Update an existing favourite"
+         description: ""
+         operationId: "updateFavourite"
+         consumes:
+            - "application/json"
+         produces:
+            - "application/json"
+         parameters:
+            - in: "body"
+              name: "body"
+              description: "Favourite object that needs to be added to the store"
+              required: true
+              schema:
+                 $ref: "#/definitions/Favourite"
+         responses:
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "favourite not found"
+         
+         security:
+            - favouritestore_auth:
+                 - "write:favourites"
+                 - "read:favourites"
+      get:
+         tags:
+            - "favourite"
+         summary: "Get All favourite"
+         description: ""
+         operationId: "getFavourite"
+         consumes:
+            - "application/json"
+            - "application/xml"
+         produces:
+            - "application/xml"
+            - "application/json"
+         responses:
+            "200":
+               description: "OK"
+               content:
+                  application/json:
+                     schema:
+                        type: array
+                        items:
+                           $ref: "#/components/schemas/Deployment"
+
+   /favourite/{favouriteId}:
+      get:
+         tags:
+            - "favourite"
+         summary: "Find favourite by ID"
+         description: "Returns a single favourite"
+         operationId: "getFavouriteById"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "favouriteId"
+              in: "path"
+              description: "ID of favourite to return"
+              required: true
+              type: "number"
+              format: "int64"
+         responses:
+            "200":
+               description: "successful operation"
+               schema:
+                  $ref: "#/definitions/Favourite"
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "Favourite not found"
+         security:
+            - api_key: []
+      post:
+         tags:
+            - "favourite"
+         summary: "Updates a favourite in the database"
+         description: ""
+         operationId: "updateFavouriteWithForm"
+         consumes:
+            - "application/x-www-form-urlencoded"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "favouriteId"
+              in: "path"
+              description: "ID of favourite that needs to be updated"
+              required: true
+              type: "number"
+              format: "int64"
+            - name: "name"
+              in: "formData"
+              description: "Updated name of the favourite"
+              required: false
+              type: "string"
+            - name: "status"
+              in: "formData"
+              description: "Updated status of the favourite"
+              required: false
+              type: "string"
+         responses:
+            "405":
+               description: "Invalid input"
+         security:
+            - favouritestore_auth:
+                 - "write:favourites"
+                 - "read:favourites"
+      delete:
+         tags:
+            - "favourite"
+         summary: "Deletes a favourite"
+         description: ""
+         operationId: "deleteFavourite"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "api_key"
+              in: "header"
+              required: false
+              type: "string"
+            - name: "favouriteId"
+              in: "path"
+              description: "Favourite id to delete"
+              required: true
+              type: "number"
+              format: "int64"
+         responses:
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "favourite not found"
+         security:
+            - favouritestore_auth:
+                 - "write:favourites"
+                 - "read:favourites"
+
+     
+                 
+
+
+
+   /simulators:
+      post:
+         tags:
+            - "simulator"
+         summary: "Add a new simulator to the store"
+         description: ""
+         operationId: "addSimulator"
+         consumes:
+            - "application/json"
+         produces:
+            - "application/json"
+         parameters:
+            - in: "body"
+              name: "body"
+              description: "Simulator object that needs to be added to the DataBase"
+              required: true
+              schema:
+                 $ref: "#/definitions/Simulator"
+         responses:
+            "201":
+               description: "Invalid input"
+         security:
+            - simulatorstore_auth:
+                 - "write:simulators"
+                 - "read:simulators"
+      put:
+         tags:
+            - "simulator"
+         summary: "Update an existing simulator"
+         description: ""
+         operationId: "updateSimulator"
+         consumes:
+            - "application/json"
+         produces:
+            - "application/json"
+         parameters:
+            - in: "body"
+              name: "body"
+              description: "Simulator object that needs to be added to the store"
+              required: true
+              schema:
+                 $ref: "#/definitions/Simulator"
+         responses:
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "simulator not found"
+         
+         security:
+            - simulatorstore_auth:
+                 - "write:simulators"
+                 - "read:simulators"
+      get:
+         tags:
+            - "simulator"
+         summary: "Get All simulator"
+         description: ""
+         operationId: "getSimulator"
+         consumes:
+            - "application/json"
+            - "application/xml"
+         produces:
+            - "application/xml"
+            - "application/json"
+         responses:
+            "200":
+               description: "OK"
+               content:
+                  application/json:
+                     schema:
+                        type: array
+                        items:
+                           $ref: "#/components/schemas/Deployment"
+
+   /simulators/{simulatorId}:
+      get:
+         tags:
+            - "simulator"
+         summary: "Find simulator by ID"
+         description: "Returns a single simulator"
+         operationId: "getSimulatorById"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "simulatorId"
+              in: "path"
+              description: "ID of simulator to return"
+              required: true
+              type: "number"
+              format: "int64"
+         responses:
+            "200":
+               description: "successful operation"
+               schema:
+                  $ref: "#/definitions/Simulator"
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "Simulator not found"
+         security:
+            - api_key: []
+      post:
+         tags:
+            - "simulator"
+         summary: "Updates a simulator in the database"
+         description: ""
+         operationId: "updateSimulatorWithForm"
+         consumes:
+            - "application/x-www-form-urlencoded"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "simulatorId"
+              in: "path"
+              description: "ID of simulator that needs to be updated"
+              required: true
+              type: "number"
+              format: "int64"
+            - name: "name"
+              in: "formData"
+              description: "Updated name of the simulator"
+              required: false
+              type: "string"
+            - name: "status"
+              in: "formData"
+              description: "Updated status of the simulator"
+              required: false
+              type: "string"
+         responses:
+            "405":
+               description: "Invalid input"
+         security:
+            - simulatorstore_auth:
+                 - "write:simulators"
+                 - "read:simulators"
+      delete:
+         tags:
+            - "simulator"
+         summary: "Deletes a simulator"
+         description: ""
+         operationId: "deleteSimulator"
+         produces:
+            - "application/xml"
+            - "application/json"
+         parameters:
+            - name: "api_key"
+              in: "header"
+              required: false
+              type: "string"
+            - name: "simulatorId"
+              in: "path"
+              description: "Simulator id to delete"
+              required: true
+              type: "number"
+              format: "int64"
+         responses:
+            "400":
+               description: "Valditaion Error"
+            "404":
+               description: "simulator not found"
+         security:
+            - simulatorstore_auth:
+                 - "write:simulators"
+                 - "read:simulators"
+
+                 
+definitions:
+   Profile:
+      type: "object"
+      required:
+         - "name"
+         - "nickname"
+         - "email"
+         - "capital"
+         - "divisa"
+         - "preferedCryptoCurrency"
+      properties:
+         capital:
+            type: "number"
+            format: "int64"
+         name:
+            type: "string"
+            example: "Saman"
+         nickname:
+            type: "string"
+            example: "Baboli"
+         email:
+            type: "string"
+            example: "samanbaboli@gmail.com"
+         divisa:
+            type: "string"
+            example: "..."
+         preferedCryptoCurrency:
+            type: "string"
+            example: "ETH"
+      xml:
+         name: "Profile"
+
+   Favourite:
+      type: "object"
+      required:
+         - "profileId"
+         - "name"
+         - "favourites"
+      properties:
+         capital:
+            type: "string"
+            example: "61bb7930793ff145a04a56fe"
+         name:
+            type: "string"
+            example: "Saman"
+         favourites:
+            type: "array"
+            example: ["ETH","ETH"]
+      xml:
+         name: "Favourtie"
+
+   Simulator:
+      type: "object"
+      required:
+         - "profileId"
+         - "dateRecorded"
+         - "cryptoCurrency"
+         - "euros"
+         - "price"
+         - "quantity"
+      properties:
+         profileId:
+            type: "string"
+            example: "61bb7930793ff145a04a56fe"
+         dateRecorded:
+            type: "date"
+            example: "2022-01-02T12:01:12.334Z"
+         cryptoCurrency:
+            type: "string"
+            example: "TOMO"
+         euros:
+            type: "number"
+            format: "int64"
+         price:
+            type: "number"
+            format: "int64"
+         quantity:
+            type: "number"
+            format: "int64"
+      xml:
+         name: "Simulator"
