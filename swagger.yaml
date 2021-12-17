@@ -18,7 +18,7 @@ tags:
 schemes:
    - "http"
 paths:
-   /profile:
+   /profiles:
       post:
          tags:
             - "profile"
@@ -94,7 +94,7 @@ paths:
                         items:
                            $ref: "#/components/schemas/Deployment"
 
-   /profile/{profileId}:
+   /profiles/{profileId}:
       get:
          tags:
             - "profile"
