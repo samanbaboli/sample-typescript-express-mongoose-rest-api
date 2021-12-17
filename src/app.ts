@@ -94,6 +94,8 @@ class App {
           version: "1.0.0",
           description: "A production ready of Xcoins™ REST-API docs",
         },
+        host: "127.0.0.1:3009",
+        basePath: "/api"
       },
       apis: ["swagger.yaml"],
     };

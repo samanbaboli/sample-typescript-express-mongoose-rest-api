@@ -5,8 +5,8 @@ info:
    title: "The Xcoins REST-API"
    contact:
       email: "samanbaboli@gmail.com"
-host: "127.0.0.1:3009"
-basePath: "/api"
+host: "127.0.0.1:3009/api"
+basePath: "/"
 tags:
    - name: "profile"
      description: "Profiles and everything associated with them"
