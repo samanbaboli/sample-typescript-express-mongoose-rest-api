@@ -1,7 +1,7 @@
 {
-  "name": "xcoin",
+  "name": "sampleapi",
   "version": "1.0.0",
-  "description": "A production ready of XCoin's REST-API",
+  "description": "A sample rest api built on Express, TypeScript, and Mongoose",
   "author": "Saman Baboli",
   "license": "MIT",
   "scripts": {

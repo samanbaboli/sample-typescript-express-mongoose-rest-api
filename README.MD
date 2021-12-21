@@ -1,37 +1,13 @@
 
-# A production ready of Xcoins™ REST-API 
+# A sample REST-API built on Express, TypeScript, and Mongoose
 
-The new version of XCoin's test REST-API is based on Node.js and TypeScript.
+A sample REST-API  built on Express, TypeScript, and Mongoose
 
 ## Requirements
 
 - Node.js 14 or later
 - NPM 6.2 or later
 - MongoDB 4.3 or later
-
-## 🔖 Previous Version Issues 
-
-- `app` and `server` were not separated.
-- Excessive use of `var`
-- Unit `tests` was not used
-- The endpoints did not have any `validation`.
-- There was no `gitignore` file
-- No `comments`
-- Responses were not in a specific `format`.
-- No `Readme.md` file
-- The `router` and `controller` files were not separated
-- JavaScript coding `conventions` are not being followed, for example, in the naming of `variables`
-- There was no `rate limiter`
-- Excessive use of `console.log`
-- The description and author name in `package.json` were blank
-- There are no typescript `interfaces` for models
-- `Chart.js`, `express-handlebars`, and `luxon` were not required but were included as dependencies
-- There is no `error handler` 
-- `Lodash` is required but not used
-- IDs should be defined as `objectIds` rather than `strings` in models
-- The absence of some `CRUD` operations and routes 
-
-
 
 ## Environment Variables
 
@@ -46,13 +22,13 @@ To run this project, you will need to add the following environment variables to
 Clone the project
 
 ```bash
-  git clone https://github.com/samanbaboli/xcoin.git
+  git clone https://github.com/samanbaboli/sample-typescript-express-mongoose-rest-api.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd xcoin
+  cd sample-typescript-express-mongoose-rest-api
 ```
 
 Install dependencies

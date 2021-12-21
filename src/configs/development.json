@@ -2,7 +2,7 @@
     "env": "development",
     "dbConfig": {
         "host": "localhost",
-        "database": "xcoins",
+        "database": "saman",
         "port": 27017
     },
     "secretKey": "RR^&T*()SPIODUhuakjd",
